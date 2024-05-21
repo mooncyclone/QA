@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Document</title>
+
+	<script src="../libs/gsap/gsap.min.js" defer></script>
+	<script src="../libs/gsap/ScrollTrigger.min.js" defer></script>
+	<script src="../libs/gsap/ScrollSmoother.min.js" defer></script>
+
+	<link rel="stylesheet" href="../css/gitlab.css">
+	<script src="../js/gitlab.js" defer></script>
+
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="content">
+
+			<header class="hero-section">
+				<img data-speed=".6" class="hero" src="../assets/images/gitlab/gitlab-logo-500.png" alt="Alt" >
+				<div class="container">
+					<div data-speed=".75" class="main-header">
+						<h1 class="main-title">GitLab</h1>
+					</div>
+				</div>
+			</header>
+		
+			<div class="portfolio">
+				<div class="container">
+					<main class="gallery">
+	
+						<div data-speed=".9" class="gallery__left">
+				
+							<img width=1400 class="gallery__item" src="/assets/images/gitlab/tagesflow.png" alt="Alt">
+							
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Функциональность</h2>
+								<p class="text-block__p"> <b>Схлопнем коммиты</b>.</p>
+								<br>
+								<p class="text-block__p">Зачастую, наши мелкие коммиты по типу "покрасил кнопку в красный" помогают ревьюерам и теряют ценность когда необходимо вливать пулреквест. Для этого мы можем легко схлопнуть их в один целостный понятный коммит.</p>
+								<br>
+								<p class="text-block__p">Для начала, используем команду <b>git cherry -v master</b> которая покажет разницу между текущей веткой и мастером. В результате увидим 4 коммита, которые мы схлопнем в один</p>
+								<br>
+								<p class="test-block__p">Перепишем историю с момента 4 коммита назад, используем команду <b>`</b> i - в данном случаем интерактивный режим.</p>
+							</div>
+
+							<img class="gallery__item" src="/assets/images/youtrack/отчет2.png" alt="Alt">
+		
+							<img class="gallery__item" src="../assets/images/youtrack/intmat1.png" alt="Alt">
+
+							<video width="1080" height="760" controls>
+								<source src='../assets/video/You3.mov' type="video/mp4">
+							</video>
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Почта</h2>
+								<p class="text-block__p">Почтовый клиент Sogo</p>
+							</div>
+		
+						</div>
+
+						<div data-speed="1.1" class="gallery__right">
+		
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">GitFlow</h2>
+								<p class="text-block__p"><b>Gitflow</b> — это популярная методология управления ветками в Git, разработанная Винсентом Дриссеном. Она помогает упорядочить процесс разработки, предоставляя четкие правила для создания и слияния веток.</p>
+								<br>
+								<p class="text-block__p">Основные элементы Gitflow:</p>
+								<br>
+								<p class="text-block__p">Основные ветки: <br> <b>main</b>(master): стабильная версия, готовая для выпуска; <br> <b>develop</b>: последняя версия кода с новыми функциями и исправлениями, предназначенная для тестирования.</p>
+								<br>
+								<p class="text-block__p">Поддерживающие ветки: <br> <b>feature</b> создаются для разработки новых функций. Ветви feature создаются от develop и после завершения сливаются обратно в develop; <br> <b>release</b>: используются для подготовки новой версии. Ветви release создаются от develop и после завершения сливаются в main и develop; <br> <b>hotfix</b>: предназначены для экстренного исправления багов в main. Ветви hotfix создаются от main и после завершения сливаются в main и develop.</p>
+								<br>
+								<p class="text-block__p">Основной принцип Gitflow — четкое разделение кода на этапы разработки, тестирования и релиза, что облегчает совместную работу и управление проектом.</p>
+								<br>
+								<h2 class="text-block__h">Gitlog</h2>
+								<br>
+								<p class="test-block__p">Для просмотра истории коммитов достаточно использовать команду <b>git log</b> <br> Добавив флаг <b>-p</b> можно увидеть разницу (выводит патч), внесённую в каждый коммит.</p>
+								<img class="gallery__item" src="../assets/images/gitlab/gitlog.png"Alt">
+
+							</div>
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitcommits.png"Alt">
+
+							<video width="1080" height="760" controls>
+								<source src='../assets/video/Отчет.mov' type="video/mp4">
+							</video>
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Интеграция Mattermost - GitLab</h2>
+								<br>
+								<p class="text-block__p">Чтобы реализовать систему уведомления в канал Mattermost необходимо знать специальный ключ канала - webhook. Прописав его в репозитории в области интеграции получаем рабочие уведомления в рабочий канал.</p>
+							</div>
+
+
+							<img class="gallery__item" src="../assets/images/youtrack/ytnot.png" alt="Alt">
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Интеграция YouTrack - GitLab</h2>
+								<br>
+								<p class="text-block__p">Для быстрого нахождения интересующей ветки разработки в системе GitLab по задаче из YouTrack была реализована интеграция</p>
+								<br>
+								<p class="text-block__p"></p>
+							</div>
+
+							<img class="gallery__item" src="../assets/images/youtrack/mail.png" alt="Alt">
+		
+						</div>
+
+					</main>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>
