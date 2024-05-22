@@ -47,7 +47,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	sliderMain.controller.control = sliderBg;
 
-	document.querySelectorAll('.slider__item').forEach(item => {
+	// Массив с именами файлов для перехода
+	const pageLinks = ['youtrack.html', 'gitlab.html', 'page3.html', 'page4.html', 'page5.html', 'page6.html'];
+
+	document.querySelectorAll('.slider__item').forEach((item, index) => {
 			item.addEventListener('click', event => {
 					const isOpened = item.classList.contains('opened');
 					// Закрытие всех открытых изображений при клике на любое изображение
@@ -62,13 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
 							// Установка времени анимации (в миллисекундах)
 							const animationDuration = 2000;
 							const overflowDuration = 3000;
-							// Плавное увеличение размера изображения до полного экрана
-							item.querySelector('.slider__img').style.transition = `transform ${animationDuration}ms ease-in-out`;
-							item.querySelector('.slider__img').style.transform = 'scale(1)';
-							item.querySelector('.slider__img').style.overflow = `initial ${overflowDuration}ms ease-in-out`;
-							// Задержка перед переходом на страницу youtrack.html после завершения анимации
+							// // Плавное увеличение размера изображения до полного экрана
+							// item.querySelector('.slider__img').style.transition = `transform ${animationDuration}ms ease-in-out`;
+							// item.querySelector('.slider__img').style.transform = 'scale(1)';
+							// item.querySelector('.slider__img').style.overflow = `initial ${overflowDuration}ms ease-in-out`;
+							// Задержка перед переходом на соответствующую страницу после завершения анимации
 							setTimeout(() => {
-									window.location.href = 'youtrack.html';
+									window.location.href = pageLinks[index];
 							}, animationDuration);
 					}
 			});
@@ -83,27 +86,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			const activeSlide = sliderMain.slides[sliderMain.activeIndex];
 			if (activeSlide === sliderMain.slides[0]) {
 					// Если мы вернулись на первый слайд, то закрываем изображение
-					document.querySelector('.slider__item.opened').classList.remove('opened');
+					const openedItem = document.querySelector('.slider__item.opened');
+					if (openedItem) {
+							openedItem.classList.remove('opened');
+					}
 			}
 			if (activeSlide === sliderMain.slides[1]) {
 					// Если мы вернулись со второго слайда, то перенаправляем на index.html
 					window.location.href = 'index.html';
-			}
-	});
-
-	const firstImage = document.querySelector('.slider__item:first-child');
-	let isOpened = false;
-
-	firstImage.addEventListener('click', () => {
-			if (isOpened) {
-					firstImage.classList.remove('opened');
-					isOpened = false;
-			} else {
-					firstImage.classList.add('opened');
-					setTimeout(() => {
-							window.location.href = 'youtrack.html';
-					}, 2000); // Задержка в 2 секунды перед переходом
-					isOpened = true;
 			}
 	});
 });
