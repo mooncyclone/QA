@@ -44,14 +44,18 @@
 								<br>
 								<p class="text-block__p">Зачастую, наши мелкие коммиты по типу "покрасил кнопку в красный" помогают ревьюерам и теряют ценность когда необходимо вливать пулреквест. Для этого мы можем легко схлопнуть их в один целостный понятный коммит.</p>
 								<br>
-								<p class="text-block__p">Для начала, используем команду <b>git cherry -v master</b> которая покажет разницу между текущей веткой и мастером. В результате увидим 4 коммита, которые мы схлопнем в один</p>
+								<p class="text-block__p">Для начала, используем команду <b>git cherry -v master</b> которая покажет разницу между текущей веткой и мастером. В результате увидим 6 коммитов, которые мы схлопнем в один</p>
 								<br>
-								<p class="test-block__p">Перепишем историю с момента 4 коммита назад, используем команду <b>`</b> i - в данном случаем интерактивный режим.</p>
+								<p class="test-block__p">Перепишем историю с момента 6 коммитов назад, используем команду <b>git rebase -i HEAD~6</b> i - в данном случаем интерактивный режим.</p>
+								<br>
+								<p class="test-block__p">Тут видим доступные команды, но нас интересует команда <b>squash</b>, заменяем 5 строк после первой с <b>pick</b> на <b>squash</b> и сохраняемся.</p>
+								<br>
+								<p class="test-block__p">Удаляем лишние комменты, оставляем один первый.</p>
 							</div>
 
-							<img class="gallery__item" src="/assets/images/youtrack/отчет2.png" alt="Alt">
+							<img class="gallery__item" src="/assets/images/gitlab/gitint.png" alt="Alt">
 		
-							<img class="gallery__item" src="../assets/images/youtrack/intmat1.png" alt="Alt">
+							<img class="gallery__item" src="../assets/images/gitlab/squashpush.png" alt="Alt">
 
 							<video width="1080" height="760" controls>
 								<source src='../assets/video/You3.mov' type="video/mp4">
@@ -63,6 +67,7 @@
 							</div>
 		
 						</div>
+
 
 						<div data-speed="1.1" class="gallery__right">
 		
@@ -87,23 +92,29 @@
 
 							<img class="gallery__item" src="../assets/images/gitlab/gitcommits.png"Alt">
 
-							<video width="1080" height="760" controls>
-								<source src='../assets/video/Отчет.mov' type="video/mp4">
-							</video>
+							<img class="gallery__item" src="../assets/images/gitlab/gitcomments.png"Alt">
+
+
 
 							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Интеграция Mattermost - GitLab</h2>
+								<p class="text-block__p">Попробуем запушить (<b>git push</b>) изменения в ветку. Но сейчас это не удастся. </p>
 								<br>
-								<p class="text-block__p">Чтобы реализовать систему уведомления в канал Mattermost необходимо знать специальный ключ канала - webhook. Прописав его в репозитории в области интеграции получаем рабочие уведомления в рабочий канал.</p>
+								<p class="text-block__p">Это потому, что ваша локальная ветка и ветка на сервере отличаются. Причём не просто в локальной ветке есть некоторые коммиты, которых нет на сервере, но и старых коммитов нет. Ведь теперь один новый коммит вместо всех прежних. Чтобы запушить на сервер все изменения, несмотря на конфликт, запустим пуш с флагом --force: <b>git push --force</b></p>
+								<br>
+								<p class="test-block__p">И посмотреть список коммитов</p>
 							</div>
 
 
-							<img class="gallery__item" src="../assets/images/youtrack/ytnot.png" alt="Alt">
+							<img class="gallery__item" src="../assets/images/gitlab/squashresult.png" alt="Alt">
 
 							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Интеграция YouTrack - GitLab</h2>
+								<h2 class="text-block__h">Cherry pick</h2>
 								<br>
-								<p class="text-block__p">Для быстрого нахождения интересующей ветки разработки в системе GitLab по задаче из YouTrack была реализована интеграция</p>
+								<p class="text-block__p"><b>git cherry-pick</b> — это полезная команда, с помощью которой можно выборочно применить коммиты Git к текущей рабочей ветке HEAD</p>
+								<br>
+								<p class="text-block__p">Применима в командной разработке, когда новая функция продукта включает компоненты серверной и клиентской части, две составляющие продукта используют общий код или когда разработчик серверной части создает структуру данных, которую нужно будет использовать и в клиентской части. При этом разработчик клиентской части может с помощью команды git cherry-pick выбрать коммит, в котором условная структура данных была создана. Таким образом, он сможет продолжить работу над своими проектными задачами.</p>
+								<br>
+								<p class="text-block__p">Или, при исправлениие багов. В ходе работы обнаруживается существующий баг, и разработчик создает специальный коммит для его исправления. Этот коммит можно перенести прямо в основную ветку (main), чтобы исправить баг, прежде чем от него пострадают другие пользователи.</p>
 								<br>
 								<p class="text-block__p"></p>
 							</div>
