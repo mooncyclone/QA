@@ -1,0 +1,29 @@
+{
+  "name": "-qa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "fake:server": "cd src/infrastructure/grpc/docker &&  docker-compose build && docker-compose up --build --force-recreate --no-deps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mooncyclone/QA.git"
+  },
+  "keywords": [
+    "qa"
+  ],
+  "author": "Nikita Pugachev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mooncyclone/QA/issues"
+  },
+  "homepage": "https://github.com/mooncyclone/QA#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

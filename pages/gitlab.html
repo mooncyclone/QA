@@ -63,12 +63,23 @@
 								<h2 class="text-block__h">Займемся черешней</h2>
 								<p class="text-block__p">Для начала, необходимо узнать какой именно коммит будем переносить. Для этого воспользуемся командой <b>git cherry -v master</b>, находясь в ветке <b>pages</b>.</p>
 								<br>
-								<p class="text-block__p">Узнав идентификатор, переходим на мастер ветку (куда будем перемещать наш коммит) <b>git checkout master</b> прописываем команду переноса и вставляем идентификатор нашего коммита.</p>
+								<p class="text-block__p">Узнав идентификатор, переходим на мастер ветку (куда будем перемещать наш коммит) <b>git checkout master</b> прописываем команду переноса <b>git cherry-pick</b> и вставляем идентификатор нашего коммита.</p>
 								<br>
-								<p class="text-block__p">В результате проверим, что коммит находится на нужной ветке</p>
+								<p class="text-block__p">В результате проверим, что коммит находится на нужной ветке, при этом, идентификатор переписался, так как по сути, является новые для данной ветки, это надо учитывать.</p>
 							</div>
 		
 							<img class="gallery__item" src="../assets/images/gitlab/resultcherry.png" alt="Alt">
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitsubmodulefirst.png" alt="gitsubmodulefirst">
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitsubmoduledown.png" alt="gitsubmoduledown">
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Проблема выбора удаленного репозитория</h2>
+								<p class="text-block__p">Удаленные репозитории являются версиями наших локальных проектов и их может быть несколько, в зависимости от рабочего процесса. Для просмотра количество и адрес подключенных репозиториев достаточно ввести <b>git remote -v</b>. Однако, если клонировать репозиторий тут уже по умолчанию будет удаленная мастер ветка исходного проекта.</p>
+							</div>
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitremoteadd.png" alt="gitremoteadd">
 
 						</div>
 <!-- Правый столбец -->
@@ -90,7 +101,6 @@
 								<br>
 								<p class="test-block__p">Для просмотра истории коммитов достаточно использовать команду <b>git log</b> <br> Добавив флаг <b>-p</b> можно увидеть разницу (выводит патч), внесённую в каждый коммит.</p>
 								<img class="gallery__item" src="../assets/images/gitlab/gitlog.png"Alt">
-
 							</div>
 
 							<img class="gallery__item" src="../assets/images/gitlab/gitcommits.png"Alt">
@@ -123,15 +133,35 @@
 
 
 							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Интеграция YouTrack - GitLab</h2>
+								<h2 class="text-block__h">Git - модули</h2>
 								<br>
-								<p class="text-block__p">Для быстрого нахождения интересующей ветки разработки в системе GitLab по задаче из YouTrack была реализована интеграция</p>
+								<p class="text-block__p">Git решает проблему с синхронизацией изменений и использованием сторонних библиотек и собственной кодовой базы внутри проекта при их копировании. Подмодули позволяют сохранить один Git-репозиторий, как подкаталог другого Git-репозитория. Это даёт вам возможность клонировать в проект другой репозиторий, но коммиты при этом хранить отдельно.</p>
 								<br>
-								<p class="text-block__p"></p>
+								<p class="text-block__p">Для начала, необходимо в репозитории создать файл <b>.submodules</b> и укзаать путь, куда будут попадать бинарники импортируемой библиотеке. Разберем на примере репозиторий с документацией, где в качестве сабмодуля выступает стороння тема для <b>HUGO</b>.</p>
+								<br>
+								<p class="text-block__p">Далее, необходимо выполнить две команды, чтобы подсказать репозиторию о необходимости обозначения и загрузки подгружаемой библиотеке</p>
+								<img class="gallery__item" src="../assets/images/gitlab/gitsubmodulecommands.png" alt="gitsubmodulecommands">
+							</div>
+		
+							<div class="text-block gallery__item">
+								<p class="text-block__p">В итоге, получаем библиотеку, загруженную в заданную папку в репозитории, готовой к использованию.</p>
 							</div>
 
-							<img class="gallery__item" src="../assets/images/youtrack/mail.png" alt="Alt">
-		
+							<img class="gallery__item" src="../assets/images/gitlab/gitremote.png" alt="Alt">
+
+							<div class="text-block gallery__item">
+								<p class="text-block__p">Допустим, мы хотим получить какие-то данные с другого репозитория, для этого воспользуемся командой <b>git remote add new https://github.com/mooncyclone/blueberryEventHorizon</b>, где <b>git remote add</b> -  команда по добавлению репозитория, <b>new</b> - название нового репозитория и адрес.</p>
+								<br>
+								<p class="text-block__p">Проверим теперь сколько подключено репозиториев. Теперь можем использовать новый репозиторий для получения данных <b>git fetch new</b>.</p>
+							</div>
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Чистый репозиторий?</h2>
+								<p class="text-block__p">Как и <b>git init --bare</b>, аргумент <b>-bare</b> при назначении команде git clone приводит к созданию копии удаленного репозитория без рабочего каталога. Это означает, что репозиторий будет содержать историю проекта, к которой можно выполнять запросы <b>push</b> и <b>pull</b>, но которую нельзя редактировать напрямую.</p>
+								<br>
+								<p class="text-block__p">Кроме того, в репозитории, клонированном с опцией <b>-bare</b>, не будут настроены удаленные ветки. Как и <b>git init --bare</b>, эта команда создает удаленный репозиторий, который разработчики не смогут редактировать напрямую.</p>
+							</div>
+
 						</div>
 
 					</main>
