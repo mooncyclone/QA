@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Document</title>
+
+	<script src="../libs/gsap/gsap.min.js" defer></script>
+	<script src="../libs/gsap/ScrollTrigger.min.js" defer></script>
+	<script src="../libs/gsap/ScrollSmoother.min.js" defer></script>
+
+	<link rel="stylesheet" href="../css/infra.css">
+	<script src="../js/infra.js" defer></script>
+
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="content">
+
+			<header class="hero-section">
+				<img data-speed=".6" class="hero" src="../assets/images/infra/infraback2.jpg" alt="Alt" >
+				<div class="container">
+					<div data-speed=".75" class="main-header">
+						<h1 class="main-title">Infrastructure</h1>
+					</div>
+
+				</div>
+			</header>
+		
+			<div class="portfolio">
+				<div class="container">
+					<main class="gallery">
+	<!-- Левый столбец -->
+						<div data-speed=".9" class="gallery__left">
+				
+							<img width=1400 class="gallery__item" src="/assets/images/infra/datasetsgitlab.png" alt="Alt">
+							
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Особенности</h2>
+								<p class="text-block__p"><b>Временные особенности</b>.</p>
+								<br>
+								<p class="text-block__p">В работе учитывались особенности действия документов (сущностей) в рамках календарной работы и действия тех или иных документов. Все даты заменены на формат, применяемый в базе, а многие сроки действия документов переработы с учетом особенностей системы командами <b>CURRENT_TIMESTAMP</b></p>
+								<br>
+								<p class="text-block__p"><b>JSON - объекты</b></p>
+								<br>
+								<p class="text-block__p">Некоторые объекты в базе храняться как json объекты и работа с sql языком внутри них (установление текущей даты и времени) представляет некоторые особенности. В частности, с помощью команды <b>jsonb_build_object</b> и формирование массивов <b>jsonb_build_array</b> были сформированы и переработы некоторые сет на добавление специальных сущностей. </p>
+							</div>
+
+							<img class="gallery__item" src="/assets/images/gitlab/gitint.png" alt="Alt">
+		
+							<img class="gallery__item" src="../assets/images/gitlab/squashpush.png" alt="Alt">
+							
+							<img class="gallery__item" src="../assets/images/gitlab/gittet.png" alt="Alt">
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Займемся черешней</h2>
+								<p class="text-block__p">Для начала, необходимо узнать какой именно коммит будем переносить. Для этого воспользуемся командой <b>git cherry -v master</b>, находясь в ветке <b>pages</b>.</p>
+								<br>
+								<p class="text-block__p">Узнав идентификатор, переходим на мастер ветку (куда будем перемещать наш коммит) <b>git checkout master</b> прописываем команду переноса <b>git cherry-pick</b> и вставляем идентификатор нашего коммита.</p>
+								<br>
+								<p class="text-block__p">В результате проверим, что коммит находится на нужной ветке, при этом, идентификатор переписался, так как по сути, является новые для данной ветки, это надо учитывать.</p>
+							</div>
+		
+							<img class="gallery__item" src="../assets/images/gitlab/resultcherry.png" alt="Alt">
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitsubmodulefirst.png" alt="gitsubmodulefirst">
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitsubmoduledown.png" alt="gitsubmoduledown">
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Проблема выбора удаленного репозитория</h2>
+								<p class="text-block__p">Удаленные репозитории являются версиями наших локальных проектов и их может быть несколько, в зависимости от рабочего процесса. Для просмотра количество и адрес подключенных репозиториев достаточно ввести <b>git remote -v</b>. Однако, если клонировать репозиторий тут уже по умолчанию будет удаленная мастер ветка исходного проекта.</p>
+							</div>
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitremoteadd.png" alt="gitremoteadd">
+
+						</div>
+<!-- Правый столбец -->
+						<div data-speed="1.1" class="gallery__right">
+		
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Datasets</h2>
+								<p class="text-block__p">Зачастую, сложные системы не существуют без специальной функциональной обвязкой, для проекта <b>Trade</b> это большой объем разного рода абстракций, входящих в друг друга или имея сложные связи-зависимости.</p>
+								<br>
+								<p class="text-block__p">Для ускорения процесса разработки были прописаны датасеты, в виде SQL команды. Репозиторий с данными был загружен для удобства пользования командой.</p>
+							</div>
+
+							<img class="gallery__item" src="../assets/images/infra/datasetsmainsql.png"Alt">
+
+							<img class="gallery__item" src="../assets/images/infra/datasetsjson.png"Alt">
+
+
+
+							<div class="text-block gallery__item">
+								<p class="text-block__p">Попробуем запушить (<b>git push</b>) изменения в ветку. Но сейчас это не удастся. </p>
+								<br>
+								<p class="text-block__p">Это потому, что ваша локальная ветка и ветка на сервере отличаются. Причём не просто в локальной ветке есть некоторые коммиты, которых нет на сервере, но и старых коммитов нет. Ведь теперь один новый коммит вместо всех прежних. Чтобы запушить на сервер все изменения, несмотря на конфликт, запустим пуш с флагом --force: <b>git push --force</b></p>
+								<br>
+								<p class="test-block__p">И посмотреть список коммитов</p>
+							</div>
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Cherry pick</h2>
+								<br>
+								<p class="text-block__p"><b>git cherry-pick</b> — это полезная команда, с помощью которой можно выборочно применить коммиты Git к текущей рабочей ветке HEAD</p>
+								<br>
+								<p class="text-block__p">Применима в командной разработке, когда новая функция продукта включает компоненты серверной и клиентской части, две составляющие продукта используют общий код или когда разработчик серверной части создает структуру данных, которую нужно будет использовать и в клиентской части. При этом разработчик клиентской части может с помощью команды git cherry-pick выбрать коммит, в котором условная структура данных была создана. Таким образом, он сможет продолжить работу над своими проектными задачами.</p>
+								<br>
+								<p class="text-block__p">Или, при исправлениие багов. В ходе работы обнаруживается существующий баг, и разработчик создает специальный коммит для его исправления. Этот коммит можно перенести прямо в основную ветку (main), чтобы исправить баг, прежде чем от него пострадают другие пользователи.</p>
+							</div>
+
+							<img class="gallery__item" src="../assets/images/gitlab/cherrysha.png" alt="Alt">
+
+							<img class="gallery__item" src="../assets/images/gitlab/mastercherry.png" alt="Alt">
+
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Git - модули</h2>
+								<br>
+								<p class="text-block__p">Git решает проблему с синхронизацией изменений и использованием сторонних библиотек и собственной кодовой базы внутри проекта при их копировании. Подмодули позволяют сохранить один Git-репозиторий, как подкаталог другого Git-репозитория. Это даёт вам возможность клонировать в проект другой репозиторий, но коммиты при этом хранить отдельно.</p>
+								<br>
+								<p class="text-block__p">Для начала, необходимо в репозитории создать файл <b>.submodules</b> и укзаать путь, куда будут попадать бинарники импортируемой библиотеке. Разберем на примере репозиторий с документацией, где в качестве сабмодуля выступает стороння тема для <b>HUGO</b>.</p>
+								<br>
+								<p class="text-block__p">Далее, необходимо выполнить две команды, чтобы подсказать репозиторию о необходимости обозначения и загрузки подгружаемой библиотеке</p>
+								<img class="gallery__item" src="../assets/images/gitlab/gitsubmodulecommands.png" alt="gitsubmodulecommands">
+							</div>
+		
+							<div class="text-block gallery__item">
+								<p class="text-block__p">В итоге, получаем библиотеку, загруженную в заданную папку в репозитории, готовой к использованию.</p>
+							</div>
+
+							<img class="gallery__item" src="../assets/images/gitlab/gitremote.png" alt="Alt">
+
+							<div class="text-block gallery__item">
+								<p class="text-block__p">Допустим, мы хотим получить какие-то данные с другого репозитория, для этого воспользуемся командой <b>git remote add new https://github.com/mooncyclone/blueberryEventHorizon</b>, где <b>git remote add</b> -  команда по добавлению репозитория, <b>new</b> - название нового репозитория и адрес.</p>
+								<br>
+								<p class="text-block__p">Проверим теперь сколько подключено репозиториев. Теперь можем использовать новый репозиторий для получения данных <b>git fetch new</b>.</p>
+							</div>
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Чистый репозиторий?</h2>
+								<p class="text-block__p">Как и <b>git init --bare</b>, аргумент <b>-bare</b> при назначении команде git clone приводит к созданию копии удаленного репозитория без рабочего каталога. Это означает, что репозиторий будет содержать историю проекта, к которой можно выполнять запросы <b>push</b> и <b>pull</b>, но которую нельзя редактировать напрямую.</p>
+								<br>
+								<p class="text-block__p">Кроме того, в репозитории, клонированном с опцией <b>-bare</b>, не будут настроены удаленные ветки. Как и <b>git init --bare</b>, эта команда создает удаленный репозиторий, который разработчики не смогут редактировать напрямую.</p>
+							</div>
+
+						</div>
+
+					</main>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>
