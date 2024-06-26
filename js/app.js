@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	sliderMain.controller.control = sliderBg;
 
 	// Массив с именами файлов для перехода
-	const pageLinks = ['youtrack.html', 'gitlab.html', 'page3.html', 'page4.html', 'page5.html', 'page6.html'];
+	const pageLinks = ['youtrack.html', 'gitlab.html', 'infra.html', 'page4.html', 'page5.html', 'page6.html'];
 
 	document.querySelectorAll('.slider__item').forEach((item, index) => {
 			item.addEventListener('click', event => {
