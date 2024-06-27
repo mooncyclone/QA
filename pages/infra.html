@@ -37,7 +37,7 @@
 	<!-- Левый столбец -->
 						<div data-speed=".9" class="gallery__left">
 				
-							<img width=1400 class="gallery__item" src="/assets/images/infra/datasetsgitlab.png" alt="Alt">
+							<img width=1400 class="gallery__item" src="../assets/images/infra/datasetsgitlab.png" alt="Alt">
 							
 							<div class="text-block gallery__item">
 								<h2 class="text-block__h">Особенности</h2>
@@ -50,33 +50,43 @@
 								<p class="text-block__p">Некоторые объекты в базе храняться как json объекты и работа с sql языком внутри них (установление текущей даты и времени) представляет некоторые особенности. В частности, с помощью команды <b>jsonb_build_object</b> и формирование массивов <b>jsonb_build_array</b> были сформированы и переработы некоторые сет на добавление специальных сущностей. </p>
 							</div>
 
-							<img class="gallery__item" src="/assets/images/gitlab/gitint.png" alt="Alt">
-		
-							<img class="gallery__item" src="../assets/images/gitlab/squashpush.png" alt="Alt">
-							
-							<img class="gallery__item" src="../assets/images/gitlab/gittet.png" alt="Alt">
-
 							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Займемся черешней</h2>
-								<p class="text-block__p">Для начала, необходимо узнать какой именно коммит будем переносить. Для этого воспользуемся командой <b>git cherry -v master</b>, находясь в ветке <b>pages</b>.</p>
+								<h2 class="text-block__h">Kubernetes - k8s</h2>
+								<p class="text-block__p">Контроллеры</p>
 								<br>
-								<p class="text-block__p">Узнав идентификатор, переходим на мастер ветку (куда будем перемещать наш коммит) <b>git checkout master</b> прописываем команду переноса <b>git cherry-pick</b> и вставляем идентификатор нашего коммита.</p>
+								<p class="text-block__p"><b>Deployments</b> - контроллер, который управляет состоянием развертывания подов, которое описывается в манифесте, следит за удалением и созданием экземпляров подов. Управляет контроллерами ReplicaSet.</p>
 								<br>
-								<p class="text-block__p">В результате проверим, что коммит находится на нужной ветке, при этом, идентификатор переписался, так как по сути, является новые для данной ветки, это надо учитывать.</p>
-							</div>
-		
-							<img class="gallery__item" src="../assets/images/gitlab/resultcherry.png" alt="Alt">
-
-							<img class="gallery__item" src="../assets/images/gitlab/gitsubmodulefirst.png" alt="gitsubmodulefirst">
-
-							<img class="gallery__item" src="../assets/images/gitlab/gitsubmoduledown.png" alt="gitsubmoduledown">
-
-							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Проблема выбора удаленного репозитория</h2>
-								<p class="text-block__p">Удаленные репозитории являются версиями наших локальных проектов и их может быть несколько, в зависимости от рабочего процесса. Для просмотра количество и адрес подключенных репозиториев достаточно ввести <b>git remote -v</b>. Однако, если клонировать репозиторий тут уже по умолчанию будет удаленная мастер ветка исходного проекта.</p>
+								<p class="text-block__p"><b>ReplicaSet</b> - гарантирует, что определенное количество экземпляров подов всегда будет запущено в кластере.</p>
+								<br>
+								<p class="text-block__p"><b>StatefulSets</b> - так же как и Deployments, управляет развертыванием и масштабированием набора подов, но сохраняет набор идентификаторов и состояние для каждого пода.</p>
+								<br>
+								<p class="text-block__p"><b>DaemonSet</b> - гарантирует, что на каждом узле кластера будет присутствовать экземпляр пода.</p>
+								<br>
+								<p class="text-block__p"><b>Jobs</b> - создает определенное количество подов и смотрит, пока они успешно не завершат работу. Если под завершился с ошибкой, повторяет создание, которое мы описали определенное количество раз. Если под успешно отработал, записывает это в свой журнал.</p>
+								<br>
+								<p class="text-block__p"><b>CronJob</b> - запускает контроллеры Jobs по определенному расписанию.</p>
+								<br>
 							</div>
 
-							<img class="gallery__item" src="../assets/images/gitlab/gitremoteadd.png" alt="gitremoteadd">
+							<img class="gallery__item" src="../assets/images/infra/k8sstructure.png" alt="k8s structure">
+									
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Применение в работе</h2>
+								<p class="text-block__p">В дефолтном виде, в структуре проекта выделяются папки для хранения бинарников наших сервисов (описывается в разделе <b>build</b>), и требует наличие <b>Dockerfile</b> для описания работы контейнера. Можно использовать готовые образы для развертывания окружений, что мы и делаем на проектах.</p>
+								<br>
+								<p class="text-block__p">В разделе <b>image</b> указываем пути к нащим образам в докер хабах (registry) откуда будем браз образы для docker. Переменные, необходимые для работы сервисов вынесены в отедльные файлы <b>.env</b>. Объеденены в отдельную "сеть" и прописаны порты внутреннее/внешние.</p>
+							</div>
+
+							<div class="text-block gallery__item">
+								<h2 class="text-block__h">Жонглирование контейнерами</h2>
+								<p class="text-block__p">Отдельные контейнеры это хорошо, но зачастую, в жизни, никогда не бывает так просто. На помощь приходит инструмент <b>docker-compose</b></p>
+								<br>
+								<p class="text-block__p">Docker Compose — это инструментальное средство, входящее в состав Docker. Оно предназначено для решения задач, связанных с развёртыванием проектов. Облегчает переезд проекта на новое железо, или его масштабирование.</p>
+								<img class="gallery__item" src="../assets/images/infra/dockercomposeschema.png" alt="dockercomposeshema">
+
+							</div>
+
+							<img class="gallery__item" src="../assets/images/infra/reddisUi.png" alt="Alt">
 
 						</div>
 <!-- Правый столбец -->
@@ -93,59 +103,22 @@
 
 							<img class="gallery__item" src="../assets/images/infra/datasetsjson.png"Alt">
 
-
+							<img class="gallery__item" src="../assets/images/infra/manifest.png" alt="manifest">
 
 							<div class="text-block gallery__item">
-								<p class="text-block__p">Попробуем запушить (<b>git push</b>) изменения в ветку. Но сейчас это не удастся. </p>
-								<br>
-								<p class="text-block__p">Это потому, что ваша локальная ветка и ветка на сервере отличаются. Причём не просто в локальной ветке есть некоторые коммиты, которых нет на сервере, но и старых коммитов нет. Ведь теперь один новый коммит вместо всех прежних. Чтобы запушить на сервер все изменения, несмотря на конфликт, запустим пуш с флагом --force: <b>git push --force</b></p>
-								<br>
-								<p class="test-block__p">И посмотреть список коммитов</p>
+								<div class="text-block__h">Немного о структуре</div>
 							</div>
 
-							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Cherry pick</h2>
-								<br>
-								<p class="text-block__p"><b>git cherry-pick</b> — это полезная команда, с помощью которой можно выборочно применить коммиты Git к текущей рабочей ветке HEAD</p>
-								<br>
-								<p class="text-block__p">Применима в командной разработке, когда новая функция продукта включает компоненты серверной и клиентской части, две составляющие продукта используют общий код или когда разработчик серверной части создает структуру данных, которую нужно будет использовать и в клиентской части. При этом разработчик клиентской части может с помощью команды git cherry-pick выбрать коммит, в котором условная структура данных была создана. Таким образом, он сможет продолжить работу над своими проектными задачами.</p>
-								<br>
-								<p class="text-block__p">Или, при исправлениие багов. В ходе работы обнаруживается существующий баг, и разработчик создает специальный коммит для его исправления. Этот коммит можно перенести прямо в основную ветку (main), чтобы исправить баг, прежде чем от него пострадают другие пользователи.</p>
-							</div>
+							<img class="gallery__item" src="../assets/images/infra/dockerfile.png" alt="docker file">
 
-							<img class="gallery__item" src="../assets/images/gitlab/cherrysha.png" alt="Alt">
-
-							<img class="gallery__item" src="../assets/images/gitlab/mastercherry.png" alt="Alt">
+							<img class="gallery__item" src="../assets/images/infra/dockercompose.png" alt="dockercompose">
 
 
 							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Git - модули</h2>
+								<h2 class="text-block__h">Кэширование с Redis</h2>
+								<p class="text-block__p">Redis — мощное хранилище данных в памяти, широко используется для кэширования данных. В сочетании с Go, статически типизированным, компилируемым языком программирования, разработанным для простоты и эффективности, Redis может значительно улучшить производительность и масштабируемость приложений</p>
 								<br>
-								<p class="text-block__p">Git решает проблему с синхронизацией изменений и использованием сторонних библиотек и собственной кодовой базы внутри проекта при их копировании. Подмодули позволяют сохранить один Git-репозиторий, как подкаталог другого Git-репозитория. Это даёт вам возможность клонировать в проект другой репозиторий, но коммиты при этом хранить отдельно.</p>
-								<br>
-								<p class="text-block__p">Для начала, необходимо в репозитории создать файл <b>.submodules</b> и укзаать путь, куда будут попадать бинарники импортируемой библиотеке. Разберем на примере репозиторий с документацией, где в качестве сабмодуля выступает стороння тема для <b>HUGO</b>.</p>
-								<br>
-								<p class="text-block__p">Далее, необходимо выполнить две команды, чтобы подсказать репозиторию о необходимости обозначения и загрузки подгружаемой библиотеке</p>
-								<img class="gallery__item" src="../assets/images/gitlab/gitsubmodulecommands.png" alt="gitsubmodulecommands">
-							</div>
-		
-							<div class="text-block gallery__item">
-								<p class="text-block__p">В итоге, получаем библиотеку, загруженную в заданную папку в репозитории, готовой к использованию.</p>
-							</div>
-
-							<img class="gallery__item" src="../assets/images/gitlab/gitremote.png" alt="Alt">
-
-							<div class="text-block gallery__item">
-								<p class="text-block__p">Допустим, мы хотим получить какие-то данные с другого репозитория, для этого воспользуемся командой <b>git remote add new https://github.com/mooncyclone/blueberryEventHorizon</b>, где <b>git remote add</b> -  команда по добавлению репозитория, <b>new</b> - название нового репозитория и адрес.</p>
-								<br>
-								<p class="text-block__p">Проверим теперь сколько подключено репозиториев. Теперь можем использовать новый репозиторий для получения данных <b>git fetch new</b>.</p>
-							</div>
-
-							<div class="text-block gallery__item">
-								<h2 class="text-block__h">Чистый репозиторий?</h2>
-								<p class="text-block__p">Как и <b>git init --bare</b>, аргумент <b>-bare</b> при назначении команде git clone приводит к созданию копии удаленного репозитория без рабочего каталога. Это означает, что репозиторий будет содержать историю проекта, к которой можно выполнять запросы <b>push</b> и <b>pull</b>, но которую нельзя редактировать напрямую.</p>
-								<br>
-								<p class="text-block__p">Кроме того, в репозитории, клонированном с опцией <b>-bare</b>, не будут настроены удаленные ветки. Как и <b>git init --bare</b>, эта команда создает удаленный репозиторий, который разработчики не смогут редактировать напрямую.</p>
+								<p class="text-block__p">Для удобства работы можно использовать разные клиенты, например, P3X Redis UI</p>
 							</div>
 
 						</div>
